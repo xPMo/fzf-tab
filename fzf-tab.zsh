@@ -5,6 +5,13 @@
 [[ ! -o 'no_brace_expand' ]] || _fzf_tab_opts+=('no_brace_expand')
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
+0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
+0="${${(M)0:#/*}:-$PWD/$0}"
+
+# use prefix _fzf_tab_ls for ls-colors functions
+source "${0:h}/ls-colors/ls-colors.zsh" _fzf_tab_ls
+_fzf_tab_ls::init
+
 zmodload zsh/zutil
 
 # thanks Valodim/zsh-capture-completion
